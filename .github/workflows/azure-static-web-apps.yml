@@ -32,5 +32,6 @@ jobs:
       - name: Deploy to Azure Static Web Apps
         uses: azure/static-web-apps-deploy@v1
         with:
-            resource-group: ${{ vars.RESOURCE_GROUP }}
-            website-name: ${{ vars.WEBSSITE_NAME }}
+          github_id_token: true
+          app_location: "/"
+          output_location: "/"
