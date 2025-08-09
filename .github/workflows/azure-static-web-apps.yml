@@ -22,6 +22,10 @@ jobs:
       - name: Build static site
         run: echo '<h1>Hello World</h1>' > index.html
 
+      - name: Deploy Azure resources (Bicep)
+        run: |
+          az deployment group create --resource-group ${{ vars.AZURE_RESOURCE_GROUP }} --template-file staticwebapp.bicep --parameters staticWebAppName=${{ vars.WEBSITE_NAME }} location=${{ vars.AZURE_LOCATION }}
+
       - name: Azure Login (OIDC)
         uses: azure/login@v2
         with:
@@ -29,11 +33,6 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Deploy to Azure Static Web Apps
-        uses: azure/static-web-apps-deploy@v1
-        with:
-          github_id_token: true
-          action: "upload"
-          app_artifact_location: "index.html"
-          app_location: "/"
-          output_location: "/"
+      - name: 'Deploy to Static Web App'
+        run: |
+          az staticwebapp upload --name ${{vars.WEBSITE_NAME}} --source . --app-location . --output-location . --verbose
