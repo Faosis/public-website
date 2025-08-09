@@ -33,5 +33,7 @@ jobs:
         uses: azure/static-web-apps-deploy@v1
         with:
           github_id_token: true
+          action: "upload"
+          app_artifact_location: "index.html"
           app_location: "/"
           output_location: "/"
