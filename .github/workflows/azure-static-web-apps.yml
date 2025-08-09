@@ -20,16 +20,16 @@ jobs:
       - name: Build static site
         run: echo '<h1>Hello World</h1>' > index.html
 
-      - name: Deploy Azure resources (Bicep)
-        run: |
-          az deployment group create --resource-group "dj-website" --template-file staticwebapp.bicep --parameters staticWebAppName="public-site" location="westus2"
-
       - name: Azure Login (OIDC)
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          
+      - name: Deploy Azure resources (Bicep)
+        run: |
+          az deployment group create --resource-group "dj-website" --template-file staticwebapp.bicep --parameters staticWebAppName="public-site" location="westus2"
 
       - name: 'Deploy to Static Web App'
         run: |
