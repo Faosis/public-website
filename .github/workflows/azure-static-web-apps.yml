@@ -1,12 +1,10 @@
 name: Azure Static Web Apps CI/CD
 
 on:
+  push:
+    branches:
+      - 'main'
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Target environment for deployment'
-        required: true
-        default: 'prod'
 
 permissions:
   id-token: write
