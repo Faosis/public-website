@@ -4,7 +4,7 @@ param githubRepoUrl string = 'https://github.com/Faosis/public-website'
 param branch string = 'main'
 param customDomain string = 'moore-it.cloud'
 
-resource staticWebApp 'Microsoft.Web/staticSites@2023-06-01-preview' = {
+resource staticWebApp 'Microsoft.Web/staticSites@2024-11-01' = {
   name: staticWebAppName
   location: location
   sku: {
