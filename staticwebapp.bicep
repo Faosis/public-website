@@ -8,12 +8,6 @@ param location string
 // param customDomain string = 'moore-it.cloud'
 
 
-resource staticWebApp 'Microsoft.Web/staticSites@2024-11-01' = {
-  name: staticWebAppName
-  location: location
-  sku: 'Free'
-  }
-
 @description('Create a static web app')
 module swa 'br/public:avm/res/web/static-site:0.3.0' = {
   name: 'client'
