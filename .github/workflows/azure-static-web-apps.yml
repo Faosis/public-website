@@ -22,7 +22,7 @@ jobs:
 
       - name: Deploy Azure resources (Bicep)
         run: |
-          az deployment group create --resource-group ${{ vars.AZURE_RESOURCE_GROUP }} --template-file staticwebapp.bicep --parameters staticWebAppName=${{ vars.WEBSITE_NAME }} location=${{ vars.AZURE_LOCATION }}
+          az deployment group create --resource-group ${{ vars.RESOURCE_GROUP }} --template-file staticwebapp.bicep --parameters staticWebAppName=${{ vars.WEBSITE_NAME }} location=${{ vars.AZURE_LOCATION }}
 
       - name: Azure Login (OIDC)
         uses: azure/login@v2
