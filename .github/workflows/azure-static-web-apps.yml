@@ -19,6 +19,7 @@ jobs:
       - name: Test environment variables
         run: |
           echo "Testing environment: ${{ github.event.inputs.environment }}"
+          echo "Testing environment: ${{ github.event.inputs.environment }}"
           echo "Using Azure resource group: ${{ vars.AZURE_RESOURCE_GROUP }}"
           echo "Using Azure location: ${{ vars.AZURE_LOCATION }}"
 
