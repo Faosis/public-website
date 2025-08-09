@@ -30,5 +30,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy to Azure Static Web Apps
-        run: |
-          az staticwebapp upload --name public-website-app --resource-group <your-resource-group> --source . --output-location .
+        uses: azure/static-web-apps-deploy@v1
+        with:
+            resource-group: ${{ vars.RESOURCE_GROUP }}
+            website-name: ${{ vars.WEBSSITE_NAME }}
