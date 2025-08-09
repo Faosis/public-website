@@ -1,40 +1,34 @@
-// Parameters
-param staticWebAppName string = 'public-website-app'
-param location string = resourceGroup().location
+param staticWebAppName string
+param location string
 param githubRepoUrl string = 'https://github.com/Faosis/public-website'
 param branch string = 'main'
-param githubWorkflowIdentityPrincipalId string // Provide the principalId of the GitHub workflow identity
 param customDomain string = 'moore-it.cloud'
 
-// Static Web App resource
 resource staticWebApp 'Microsoft.Web/staticSites@2023-06-01-preview' = {
   name: staticWebAppName
   location: location
   sku: {
-    name: 'Standard'
+    name: 'Free'
+  }
+  identity: {
+    type: 'SystemAssigned'
   }
   properties: {
     repositoryUrl: githubRepoUrl
     branch: branch
     buildProperties: {
-      apiLocation: '' // No API for basic hello world
-      appLocation: '/' // Root directory
-      outputLocation: 'build' // Adjust if needed
-    }
-    identity: {
-      type: 'UserAssigned'
-      userAssignedIdentities: {
-        '${githubWorkflowIdentityPrincipalId}': {}
-      }
+      apiLocation: ''
+      appLocation: '/'
+      outputLocation: 'build'
     }
   }
 }
 
-// Custom domain resource
+// Optional: custom domain resource, you still need to set validationToken after deployment
 resource customDomainResource 'Microsoft.Web/staticSites/customDomains@2022-09-01' = {
   name: '${staticWebApp.name}/${customDomain}'
   properties: {
-    validationToken: '' // You will need to retrieve and set the validation token after initial deployment
+    validationToken: '' // fill after deployment
   }
   dependsOn: [
     staticWebApp
