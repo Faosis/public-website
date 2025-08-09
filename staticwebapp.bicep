@@ -9,6 +9,7 @@ resource staticWebApp 'Microsoft.Web/staticSites@2024-11-01' = {
   location: location
   sku: {
     name: 'Free'
+    tier: 'Free'
   }
   identity: {
     type: 'SystemAssigned'
