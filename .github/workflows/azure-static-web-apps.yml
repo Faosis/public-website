@@ -17,9 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build static site
-        run: echo '<h1>Hello World</h1>' > index.html
-
       - name: Azure Login (OIDC)
         uses: azure/login@v2
         with:
@@ -29,8 +26,18 @@ jobs:
 
       - name: Deploy Azure resources (Bicep)
         run: |
-          az deployment group create --resource-group ${{ vars.RESOURCE_GROUP }} --template-file staticwebapp.bicep --parameters staticWebAppName=${{ vars.WEBSITE_NAME }} location=${{ vars.AZURE_LOCATION }}
+          az deployment group create \
+            --resource-group ${{ vars.RESOURCE_GROUP }} \
+            --template-file staticwebapp.bicep \
+            --parameters staticWebAppName=${{ vars.WEBSITE_NAME }} \
+            --parameters location=${{ vars.AZURE_LOCATION }} \
+            --verbose
 
       - name: 'Deploy to Static Web App'
         run: |
-          az staticwebapp upload --name ${{vars.WEBSITE_NAME}} --source . --app-location . --output-location . --verbose
+          az staticwebapp upload \
+            --name ${{ vars.WEBSITE_NAME }} \
+            --source src \
+            --app-location src \
+            --output-location src \
+            --verbose
