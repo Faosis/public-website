@@ -115,6 +115,40 @@ footer {
     margin-top: 4rem;
 }
 
+.site-implementation {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--section-background);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.site-implementation ul {
+    list-style-type: none;
+    padding-left: 1.5rem;
+}
+
+.site-implementation li {
+    position: relative;
+    margin: 0.5rem 0;
+}
+
+.site-implementation li::before {
+    content: "→";
+    position: absolute;
+    left: -1.5rem;
+    color: var(--primary-color);
+}
+
+.site-implementation a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.site-implementation a:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 768px) {
     .competencies-grid,
     .contact-grid {
