@@ -35,7 +35,7 @@ jobs:
 
       - name: 'Deploy to Static Web App'
         run: |
-          az staticwebapp upload \
+          az staticwebapp deploy \
             --name ${{ vars.WEBSITE_NAME }} \
             --source src \
             --app-location src \
